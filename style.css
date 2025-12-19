@@ -1,0 +1,23 @@
+body {
+            box-sizing: border-box;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e57b1 0%, #143fb3 100%);
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .ad-space {
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            border: 2px dashed #ccc;
+        }
+        .booking-card {
+            border-left: 4px solid #3b82f6;
+        }
+        .status-pending { background-color: #fef3c7; color: #92400e; }
+        .status-confirmed { background-color: #d1fae5; color: #065f46; }
+        .status-completed { background-color: #dbeafe; color: #1e40af; }
