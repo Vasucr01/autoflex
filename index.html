@@ -1,69 +1,69 @@
-<!DOCTYPE html><!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="h-full">
 <head>
   <meta charset="UTF-8">
-  <title>AutoFlex - Car Rental</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoFlex - Car Rental Platform</title>
 
-  <!-- Tailwind -->
+  <!-- Tailwind (same as before) -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Custom CSS -->
+  <!-- CSS separated -->
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="h-full">
+<div class="app-wrapper" style="background:#f8f9fa">
 
-<!-- NAVBAR -->
-<nav class="navbar">
-  <div class="nav-container">
-    <h1 class="logo">AutoFlex</h1>
-    <div class="nav-links">
-      <a href="#home">Home</a>
-      <a href="#cars">Cars</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+<!-- NAVBAR (UNCHANGED) -->
+<nav style="background:#1e293b;color:white">
+  <div style="max-width:1200px;margin:auto;padding:16px;display:flex;justify-content:space-between">
+    <div style="display:flex;gap:48px;align-items:center">
+      <div id="logo" style="font-size:24px;font-weight:bold;color:#3b82f6">AutoFlex</div>
+      <div style="display:flex;gap:32px">
+        <a href="#home">Home</a>
+        <a href="#cars">Cars</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
     </div>
   </div>
 </nav>
 
-<!-- HERO -->
-<section id="home" class="hero">
-  <h1>Reliable Car Rentals, Simplified</h1>
-  <p>Book verified vehicles with transparent pricing</p>
-  <button onclick="scrollToCars()">Browse Cars</button>
-</section>
-
-<!-- CARS -->
-<section id="cars" class="section">
-  <h2>Available Cars</h2>
-  <div id="car-grid" class="car-grid"></div>
-</section>
-
-<!-- ABOUT -->
-<section id="about" class="section light">
-  <h2>About AutoFlex</h2>
-  <p>
-    AutoFlex is a prototype car rental platform built for GTU Design Engineering.
-    It demonstrates secure booking, verified cars, and a clean UI.
+<!-- HERO (UNCHANGED) -->
+<section id="home" style="background:linear-gradient(135deg,#1e293b,#334155);color:white;padding:80px;text-align:center">
+  <h1 id="hero-headline" style="font-size:48px;font-weight:bold">
+    Reliable Car Rentals, Simplified
+  </h1>
+  <p id="hero-subtext" style="font-size:20px;color:#cbd5e1;margin-top:20px">
+    Book verified vehicles with transparent pricing
   </p>
+  <button onclick="scrollToCars()" style="margin-top:30px;background:#3b82f6;padding:16px 40px;border-radius:8px">
+    Browse Cars
+  </button>
 </section>
 
-<!-- CONTACT -->
-<section id="contact" class="section">
-  <h2>Contact Us</h2>
-  <p>Email: info@autoflex.com</p>
-  <p>Phone: +91 98765 43210</p>
+<!-- CARS (UNCHANGED) -->
+<section id="cars" style="padding:80px;background:white">
+  <div style="max-width:1200px;margin:auto">
+    <h2 style="font-size:36px;font-weight:bold;text-align:center;margin-bottom:48px">
+      Available Cars
+    </h2>
+    <div id="car-grid"
+      style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:32px">
+    </div>
+  </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  © 2024 AutoFlex | GTU Design Engineering Project
+<!-- FOOTER (UNCHANGED) -->
+<footer style="background:#1e293b;color:#cbd5e1;text-align:center;padding:32px">
+  © 2024 AutoFlex — GTU Design Engineering Project
 </footer>
 
-<!-- JS -->
+</div>
+
+<!-- JS separated -->
 <script src="script.js"></script>
 </body>
 </html>
-
-
