@@ -1,59 +1,78 @@
-/* Better spacing and modern typography */body { box-sizing: border-box; }
-
-.hero-gradient {
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
+.hero{
+  background: linear-gradient(135deg,#2563eb,#1e40af);
 }
 
-.card-hover {
-    transition: 0.3s;
-}
-.card-hover:hover {
-    transform: translateY(-5px);
-}
-
-.booking-card {
-    border-left: 5px solid #2563eb;
+.car-card{
+  background:white;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  transition:0.3s;
 }
 
-.modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.car-card:hover{
+  transform:translateY(-6px);
 }
 
-.modal-box {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 300px;
+.car-card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
 }
 
-.modal-box input {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 8px;
-    border: 1px solid #ccc;
+.car-card button{
+  width:100%;
+  margin-top:10px;
+  background:#2563eb;
+  color:white;
+  padding:10px;
+  border-radius:10px;
 }
 
-.modal-box button {
-    background: #2563eb;
-    color: white;
-    padding: 8px;
-    width: 100%;
-    margin-top: 5px;
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.success {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #22c55e;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 6px;
+.modal-box{
+  background:white;
+  padding:25px;
+  border-radius:16px;
+  width:320px;
 }
 
+.modal-box input{
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
+  border:1px solid #ccc;
+  border-radius:8px;
+}
 
+.modal-box button{
+  width:100%;
+  background:#2563eb;
+  color:white;
+  padding:10px;
+  border-radius:8px;
+}
+
+.close{
+  background:none;
+  color:#555;
+  margin-top:8px;
+}
+
+.toast{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:#16a34a;
+  color:white;
+  padding:12px 20px;
+  border-radius:12px;
+}
