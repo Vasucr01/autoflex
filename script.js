@@ -1,213 +1,117 @@
+// Enhanced car data with more technical details
+const sampleCars = [
+    {
+        id: 1,
+        make: "Maruti Swift Dzire",
+        year: 2022,
+        location: "Mumbai",
+        price: 1100,
+        image: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=800",
+        rating: 4.8,
+        owner: "Rajesh K.",
+        transmission: "Manual",
+        fuel: "Petrol"
+    },
+    {
+        id: 2,
+        make: "Honda City",
+        year: 2021,
+        location: "Delhi",
+        price: 1400,
+        image: "https://images.unsplash.com/photo-1593364404571-0f72f8549382?auto=format&fit=crop&q=80&w=800",
+        rating: 4.6,
+        owner: "Priya S.",
+        transmission: "Automatic",
+        fuel: "Petrol"
+    },
+    {
+        id: 3,
+        make: "Hyundai Creta",
+        year: 2023,
+        location: "Bangalore",
+        price: 2000,
+        image: "https://images.unsplash.com/photo-1662445100041-017e2c90666d?auto=format&fit=crop&q=80&w=800",
+        rating: 4.9,
+        owner: "Amit R.",
+        transmission: "Automatic",
+        fuel: "Diesel"
+    }
+];
 
-        // Sample car data
-        const sampleCars = [
-            {
-                id: 1,
-                make: "Maruti Swift Dzire",
-                year: 2022,
-                location: "Mumbai",
-                price: 1100,
-                image: src="dzire.jpg" ,              
-                owner: "Rajesh K."
-            },
-            {
-                id: 2,
-                make: "Honda City",
-                year: 2021,
-                location: "Delhi",
-                price: 1400,
-                image: src="hondacity.webp" ,
-                rating: 4.6,
-                owner: "Priya S."
-            },
-            {
-                id: 3,
-                make: "Hyundai Creta",
-                year: 2023,
-                location: "Bangalore",
-                price: 2000,
-                image: src="creta.webp" ,
-                rating: 4.9,
-                owner: "Amit R."
-            },
-            {
-                id: 4,
-                make: "Tata Nexon EV",
-                year: 2022,
-                location: "Pune",
-                price: 1800,
-                image: src="tatanexon.webp" ,
-                rating: 4.7,
-                owner: "Sneha M."
-            },
-            {
-                id: 5,
-                make: "Mahindra XUV700",
-                year: 2021,
-                location: "Chennai",
-                price: 2200,
-                image: src="mahindraxuv700.webp" ,
-                rating: 4.5,
-                owner: "Vikram P."
-            },
-            {
-                id: 6,
-                make: "Toyota Innova Crysta",
-                year: 2020,
-                location: "Hyderabad",
-                price: 2400,
-                image: src="innova.webp" ,
-                rating: 4.4,
-                owner: "Kavya T."
-            },
-            {
-                id: 7,
-                make: "Maruti Baleno",
-                year: 2023,
-                location: "Kolkata",
-                price: 1100,
-                image: src="baleno.jpg" ,
-                rating: 4.3,
-                owner: "Arjun D."
-            },
-            {
-                id: 8,
-                make: "Kia Seltos",
-                year: 2022,
-                location: "Ahmedabad",
-                price: 2000,
-                image: src="kia.jpg" ,
-                rating: 4.6,
-                owner: "Ritu G."
-            }
-        ];
+document.addEventListener('DOMContentLoaded', () => {
+    displayCars(sampleCars);
+});
 
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', function() {
-            displayCars(sampleCars);
-        });
-
-        // Display cars function
-        function displayCars(cars) {
-            const carListings = document.getElementById('carListings');
-            carListings.innerHTML = cars.map(car => `
-                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
-                    <img src="${car.image}" alt="${car.make}" class="w-full h-48 object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">${car.make}</h3>
-                        <p class="text-gray-600 mb-2">📍 ${car.location} • ${car.year}</p>
-                        <p class="text-gray-600 mb-2">⭐ ${car.rating} • Owner: ${car.owner}</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-2xl font-bold text-orange-600">₹${car.price}/day</span>
-                            <button onclick="bookCar(${car.id})" class="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors">Book Now</button>
-                        </div>
-                    </div>
+function displayCars(cars) {
+    const carListings = document.getElementById('carListings');
+    carListings.innerHTML = cars.map(car => `
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden card-hover group">
+            <div class="relative">
+                <img src="${car.image}" alt="${car.make}" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-2 py-1 rounded-lg text-xs font-bold shadow-sm">
+                    ⭐ ${car.rating}
                 </div>
-            `).join('');
-        }
+            </div>
+            <div class="p-5">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="text-lg font-bold text-gray-800">${car.make}</h3>
+                    <span class="text-sm font-medium text-gray-500">${car.year}</span>
+                </div>
+                <div class="flex gap-3 mb-4">
+                    <span class="bg-gray-100 text-gray-600 text-[10px] px-2 py-1 rounded uppercase font-bold tracking-wider">${car.transmission}</span>
+                    <span class="bg-gray-100 text-gray-600 text-[10px] px-2 py-1 rounded uppercase font-bold tracking-wider">${car.fuel}</span>
+                </div>
+                <p class="text-gray-500 text-sm mb-4">📍 ${car.location} • Hosted by ${car.owner}</p>
+                <div class="flex justify-between items-center pt-4 border-t border-gray-50">
+                    <div>
+                        <span class="text-xl font-bold text-blue-600">₹${car.price}</span>
+                        <span class="text-gray-400 text-sm">/day</span>
+                    </div>
+                    <button onclick="initiateSecureBooking(${car.id})" class="bg-blue-600 text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-blue-700 transition-all shadow-md hover:shadow-lg active:scale-95 text-sm">
+                        Book Securely
+                    </button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
 
-        // Search cars function
-        function searchCars() {
-            // In a real app, this would filter based on the form inputs
-            showSuccessMessage("Search completed! Showing available cars.");
-            displayCars(sampleCars);
-        }
-
-        // Book car function
-        function bookCar(carId) {
-            const car = sampleCars.find(c => c.id === carId);
-            showSuccessMessage(`Booking request sent for ${car.make}! Owner will be notified.`);
-        }
-
-        // Modal functions
-        function showLoginModal() {
-            document.getElementById('loginModal').classList.remove('hidden');
-            document.getElementById('loginModal').classList.add('flex');
-        }
-
-        function hideLoginModal() {
-            document.getElementById('loginModal').classList.add('hidden');
-            document.getElementById('loginModal').classList.remove('flex');
-        }
-
-        function showSignupModal() {
-            document.getElementById('signupModal').classList.remove('hidden');
-            document.getElementById('signupModal').classList.add('flex');
-        }
-
-        function hideSignupModal() {
-            document.getElementById('signupModal').classList.add('hidden');
-            document.getElementById('signupModal').classList.remove('flex');
-        }
-
-        // Form handlers
-        function handleLogin(event) {
-            event.preventDefault();
-            hideLoginModal();
-            showSuccessMessage("Login successful! Welcome back to AutoFlex.");
-        }
-
-        function handleSignup(event) {
-            event.preventDefault();
-            hideSignupModal();
-            showSuccessMessage("Account created successfully! Welcome to AutoFlex.");
-        }
-
-        function submitCarListing(event) {
-            event.preventDefault();
-            showSuccessMessage("Car listing submitted! It will be reviewed and published within 24 hours.");
-            event.target.reset();
-        }
-
-        // Navigation function
-        function showSection(sectionId) {
-            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Booking tab functionality
-        function showBookingTab(tab) {
-            const renterTab = document.getElementById('renterTab');
-            const ownerTab = document.getElementById('ownerTab');
-            const renterBookings = document.getElementById('renterBookings');
-            const ownerBookings = document.getElementById('ownerBookings');
-
-            if (tab === 'renter') {
-                renterTab.classList.add('bg-orange-600', 'text-white');
-                renterTab.classList.remove('text-gray-600');
-                ownerTab.classList.remove('bg-orange-600', 'text-white');
-                ownerTab.classList.add('text-gray-600');
-                renterBookings.classList.remove('hidden');
-                ownerBookings.classList.add('hidden');
-            } else {
-                ownerTab.classList.add('bg-orange-600', 'text-white');
-                ownerTab.classList.remove('text-gray-600');
-                renterTab.classList.remove('bg-orange-600', 'text-white');
-                renterTab.classList.add('text-gray-600');
-                ownerBookings.classList.remove('hidden');
-                renterBookings.classList.add('hidden');
-            }
-        }
-
-        // Success message function
-        function showSuccessMessage(message) {
-            const successMessage = document.getElementById('successMessage');
-            const successText = document.getElementById('successText');
-            successText.textContent = message;
-            successMessage.classList.remove('hidden');
-            setTimeout(() => {
-                successMessage.classList.add('hidden');
-            }, 4000);
-        }
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
+// Security Feature: 2-Step Verification Simulation
+function initiateSecureBooking(carId) {
+    const car = sampleCars.find(c => c.id === carId);
     
-(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98e77ecf862f7766',t:'MTc2MDQ0OTI5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})()
+    // Simulate a secure "Verification" popup
+    const confirmBooking = confirm(
+        `🛡️ AUTO-SECURE CHECKOUT\n\n` +
+        `Vehicle: ${car.make}\n` +
+        `Security Deposit: ₹2,000 (Refundable)\n\n` +
+        `By clicking OK, you verify that you hold a valid Indian Driving License.`
+    );
+
+    if (confirmBooking) {
+        showSuccessMessage(`Payment Securely Verified! Booking request for ${car.make} sent.`);
+    }
+}
+
+function showSuccessMessage(message) {
+    const successMessage = document.getElementById('successMessage');
+    const successText = document.getElementById('successText');
+    successText.textContent = message;
+    successMessage.classList.remove('hidden', 'translate-y-10', 'opacity-0');
+    successMessage.classList.add('translate-y-0', 'opacity-100');
+    
+    setTimeout(() => {
+        successMessage.classList.add('hidden');
+    }, 4000);
+}
+
+// Search with simple logic
+function searchCars() {
+    const city = document.querySelector('select').value;
+    if(city === "Select City") {
+        displayCars(sampleCars);
+    } else {
+        const filtered = sampleCars.filter(car => car.location === city);
+        displayCars(filtered);
+    }
+}
