@@ -1,33 +1,59 @@
-/* Better spacing and modern typography */
-body {
-    font-family: 'Inter', sans-serif;
-    color: #1e293b;
-    scroll-behavior: smooth;
+/* Better spacing and modern typography */body { box-sizing: border-box; }
+
+.hero-gradient {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
 }
 
 .card-hover {
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: 0.3s;
 }
-
 .card-hover:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+    transform: translateY(-5px);
 }
 
-/* Success Message Animation */
-#successMessage {
-    transition: all 0.5s ease;
+.booking-card {
+    border-left: 5px solid #2563eb;
 }
 
-/* Custom selection color */
-::selection {
-    background: #3b82f6;
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-box {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+}
+
+.modal-box input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+.modal-box button {
+    background: #2563eb;
     color: white;
+    padding: 8px;
+    width: 100%;
+    margin-top: 5px;
 }
 
-/* Subtle background pattern */
-.bg-gray-50 {
-    background-color: #f8fafc;
-    background-image: radial-gradient(#e2e8f0 0.5px, transparent 0.5px);
-    background-size: 24px 24px;
+.success {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #22c55e;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
 }
+
+
