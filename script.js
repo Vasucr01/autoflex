@@ -1,81 +1,74 @@
-// ===== SESSION (PROTOTYPE SECURITY) =====
-let currentUser = null;
+let loggedIn = false;
 
-// ===== SAMPLE DATA =====
+// ===== CAR DATA (YOUR IMAGES) =====
 const cars = [
-    { id:1, name:"Maruti Swift", city:"Mumbai", price:1100, rating:4.5, owner:"Rajesh" },
-    { id:2, name:"Honda City", city:"Delhi", price:1400, rating:4.6, owner:"Priya" },
-    { id:3, name:"Hyundai Creta", city:"Pune", price:2000, rating:4.8, owner:"Amit" }
+  { name:"Maruti Baleno", price:1100, img:"baleno.jpg" },
+  { name:"Honda City", price:1400, img:"hondacity.webp" },
+  { name:"Maruti Dzire", price:1200, img:"dzire.jpg" },
+  { name:"Toyota Innova Crysta", price:2400, img:"innova.webp" },
+  { name:"Kia Seltos", price:2000, img:"kia.jpg" },
+  { name:"Mahindra XUV700", price:2200, img:"mahindraxuv700.webp" },
+  { name:"Hyundai Creta", price:2100, img:"creta.webp" },
+  { name:"Tata Nexon EV", price:1800, img:"tatanexon.webp" }
 ];
 
 // ===== LOAD CARS =====
-document.addEventListener("DOMContentLoaded", () => displayCars());
+window.onload = () => {
+  const grid = document.getElementById("carGrid");
+  grid.innerHTML = cars.map(car => `
+    <div class="car-card">
+      <img src="${car.img}" alt="${car.name}">
+      <div class="p-4">
+        <h3 class="font-semibold text-lg">${car.name}</h3>
+        <p class="text-blue-600 font-bold">₹${car.price}/day</p>
+        <p class="text-sm text-slate-500">✔ Verified • 🔒 Secure</p>
+        <button onclick="bookCar('${car.name}')">Book Now</button>
+      </div>
+    </div>
+  `).join("");
+};
 
-// ===== DISPLAY =====
-function displayCars(){
-    const box = document.getElementById("carListings");
-    box.innerHTML = cars.map(c => `
-        <div class="bg-white p-6 rounded shadow card-hover">
-            <h3 class="text-xl font-bold">${c.name}</h3>
-            <p>${c.city}</p>
-            <p>⭐ ${c.rating} • ✔ Verified Owner</p>
-            <p class="text-orange-600 font-bold">₹${c.price}/day</p>
-            <p class="text-xs text-gray-500">🔒 SSL Secured Booking</p>
-            <button onclick="bookCar(${c.id})" class="mt-3 bg-blue-600 text-white px-4 py-2 rounded">Book Now</button>
-        </div>
-    `).join("");
+// ===== BOOKING =====
+function bookCar(name){
+  if(!loggedIn){
+    showToast("Please login to book");
+    openLogin();
+    return;
+  }
+  if(confirm(`Confirm booking for ${name}?`)){
+    showToast(`Booking confirmed for ${name}`);
+  }
 }
 
-// ===== BOOKING SECURITY =====
-function bookCar(id){
-    if(!currentUser){
-        alert("Please login to book securely");
-        showLoginModal();
-        return;
-    }
-    const car = cars.find(c => c.id === id);
-    if(confirm(`Confirm booking for ${car.name}?`)){
-        showSuccess(`Booking confirmed for ${car.name}`);
-    }
+// ===== LOGIN =====
+function login(e){
+  e.preventDefault();
+  loggedIn = true;
+  closeLogin();
+  showToast("Login successful");
 }
 
-// ===== AUTH =====
-function handleLogin(e){
-    e.preventDefault();
-    currentUser = { time:new Date() };
-    hideLoginModal();
-    showSuccess("Login successful. Secure session started.");
-}
-
-function handleSignup(e){
-    e.preventDefault();
-    hideSignupModal();
-    showSuccess("Account created successfully.");
+function signup(e){
+  e.preventDefault();
+  closeSignup();
+  showToast("Account created successfully");
 }
 
 // ===== MODALS =====
-function showLoginModal(){ document.getElementById("loginModal").classList.remove("hidden"); }
-function hideLoginModal(){ document.getElementById("loginModal").classList.add("hidden"); }
+function openLogin(){ document.getElementById("loginModal").classList.remove("hidden"); }
+function closeLogin(){ document.getElementById("loginModal").classList.add("hidden"); }
 
-function showSignupModal(){ document.getElementById("signupModal").classList.remove("hidden"); }
-function hideSignupModal(){ document.getElementById("signupModal").classList.add("hidden"); }
+function openSignup(){ document.getElementById("signupModal").classList.remove("hidden"); }
+function closeSignup(){ document.getElementById("signupModal").classList.add("hidden"); }
 
-// ===== UTIL =====
-function showSuccess(msg){
-    const box = document.getElementById("successMessage");
-    box.innerText = msg;
-    box.classList.remove("hidden");
-    setTimeout(()=>box.classList.add("hidden"),3000);
+// ===== TOAST =====
+function showToast(msg){
+  const t = document.getElementById("toast");
+  t.innerText = msg;
+  t.classList.remove("hidden");
+  setTimeout(()=>t.classList.add("hidden"),3000);
 }
 
-function scrollToSection(id){
-    document.getElementById(id).scrollIntoView({behavior:"smooth"});
+function scrollToCars(){
+  document.getElementById("cars").scrollIntoView({behavior:"smooth"});
 }
-
-// ===== AUTO LOGOUT =====
-setInterval(()=>{
-    if(currentUser){
-        alert("Session expired. Please login again.");
-        currentUser = null;
-    }
-}, 600000);
