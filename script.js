@@ -13,7 +13,35 @@ const cars = [
   { id: 8, name: "Tata Nexon", price: 55, image: "images/tatanexon.webp" }
 ];
 
-/* ---------------- RENDER CARS ---------------- */
+/* ---------- LOGIN ---------- */
+function openLogin() {
+  document.getElementById("login-modal").style.display = "flex";
+}
+
+function login() {
+  const email = document.getElementById("loginEmail").value.trim();
+
+  if (email === "") {
+    alert("Please enter email");
+    return;
+  }
+
+  currentUser = email;
+
+  // UI feedback (THIS WAS MISSING)
+  document.getElementById("loginBtn").innerText = email;
+  document.getElementById("loginBtn").style.borderColor = "#10b981";
+  document.getElementById("loginBtn").style.color = "#10b981";
+
+  document.getElementById("login-modal").style.display = "none";
+
+  document.getElementById("rentalsSection").innerHTML =
+    "<p>Welcome! Book a car to see your rentals.</p>";
+
+  alert("Login successful");
+}
+
+/* ---------- RENDER CARS ---------- */
 function renderCars() {
   document.getElementById("car-grid").innerHTML = cars.map(car => `
     <div style="background:white;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
@@ -33,28 +61,7 @@ function renderCars() {
   `).join("");
 }
 
-/* ---------------- LOGIN ---------------- */
-function openLogin() {
-  document.getElementById("login-modal").style.display = "flex";
-}
-
-function login() {
-  const email = document.getElementById("loginEmail").value.trim();
-
-  if (email === "") {
-    alert("Please enter email");
-    return;
-  }
-
-  currentUser = email;
-
-  document.getElementById("login-modal").style.display = "none";
-  document.getElementById("loginBtn").innerText = "Logged In";
-
-  alert("Login successful");
-}
-
-/* ---------------- BOOKING ---------------- */
+/* ---------- BOOKING ---------- */
 function bookCar(id) {
   if (!currentUser) {
     openLogin();
@@ -73,7 +80,7 @@ function bookCar(id) {
   alert(`${car.name} booked successfully`);
 }
 
-/* ---------------- RENTALS ---------------- */
+/* ---------- RENTALS ---------- */
 function renderRentals() {
   const box = document.getElementById("rentalsSection");
 
@@ -85,13 +92,13 @@ function renderRentals() {
   box.innerHTML = rentals.map(r => `
     <div style="background:white;padding:20px;border-radius:8px;margin-bottom:12px">
       🚗 <b>${r.name}</b><br>
-      📅 ${r.date} <br>
+      📅 ${r.date}<br>
       💰 ₹${r.price}/day
     </div>
   `).join("");
 }
 
-/* ---------------- ADD CAR (PROTOTYPE) ---------------- */
+/* ---------- ADD CAR ---------- */
 function addCar() {
   myCars.push("User Added Car");
 
@@ -100,7 +107,7 @@ function addCar() {
   ).join("");
 }
 
-/* ---------------- TABS ---------------- */
+/* ---------- TABS ---------- */
 function showTab(tab) {
   document.getElementById("rentalsSection").style.display =
     tab === "rentals" ? "block" : "none";
@@ -109,7 +116,7 @@ function showTab(tab) {
     tab === "cars" ? "block" : "none";
 }
 
-/* ---------------- SCROLL ---------------- */
+/* ---------- SCROLL ---------- */
 function scrollToCars() {
   document.getElementById("cars").scrollIntoView({ behavior: "smooth" });
 }
