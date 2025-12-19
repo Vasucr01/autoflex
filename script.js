@@ -1,77 +1,34 @@
-let user = null;
-
 const cars = [
-  {name:"Baleno", price:1100, img:"baleno.jpg"},
-  {name:"Honda City", price:1400, img:"hondacity.webp"},
-  {name:"Dzire", price:1200, img:"dzire.jpg"},
-  {name:"Innova Crysta", price:2400, img:"innova.webp"},
-  {name:"Kia Seltos", price:2000, img:"kia.jpg"},
-  {name:"XUV700", price:2200, img:"mahindraxuv700.webp"},
-  {name:"Creta", price:2100, img:"creta.webp"},
-  {name:"Tata Nexon", price:1800, img:"tatanexon.webp"}
+  { id: 1, name: "Maruti Baleno", price: 45, image: "images/baleno.jpg" },
+  { id: 2, name: "Hyundai Creta", price: 70, image: "images/creta.webp" },
+  { id: 3, name: "Maruti Dzire", price: 40, image: "images/dzire.jpg" },
+  { id: 4, name: "Honda City", price: 65, image: "images/hondacity.webp" },
+  { id: 5, name: "Toyota Innova Crysta", price: 90, image: "images/innova.webp" },
+  { id: 6, name: "Kia Seltos", price: 75, image: "images/kia.jpg" },
+  { id: 7, name: "Mahindra XUV700", price: 95, image: "images/mahindraxuv700.webp" },
+  { id: 8, name: "Tata Nexon", price: 55, image: "images/tatanexon.webp" }
 ];
 
-window.onload = () => {
-  const grid = document.getElementById("carGrid");
-  grid.innerHTML = cars.map(c => `
+function renderCars() {
+  const grid = document.getElementById("car-grid");
+  grid.innerHTML = cars.map(car => `
     <div class="car-card">
-      <img src="${c.img}">
-      <div class="p-4">
-        <h3 class="font-semibold">${c.name}</h3>
-        <p class="price">₹${c.price}/day</p>
-        <p class="meta">✔ Verified • 🔒 Secure</p>
-        <button onclick="book('${c.name}')">Book Now</button>
+      <img src="${car.image}" alt="${car.name}">
+      <div style="padding:20px">
+        <h3>${car.name}</h3>
+        <p><strong>₹${car.price}/day</strong></p>
+        <button class="primary" onclick="bookCar(${car.id})">Book Now</button>
       </div>
     </div>
   `).join("");
-};
-
-function book(name){
-  if(!user){
-    toast("Login required");
-    openLogin();
-    return;
-  }
-  toast(`Booking confirmed for ${name}`);
 }
 
-function login(e){
-  e.preventDefault();
-  user = e.target[0].value;
-  document.getElementById("userEmail").innerText = user;
-  document.getElementById("authArea").classList.add("hidden");
-  document.getElementById("userArea").classList.remove("hidden");
-  closeLogin();
-  toast("Login successful");
+function bookCar(id) {
+  alert("Booking feature is prototype-based only.");
 }
 
-function signup(e){
-  e.preventDefault();
-  closeSignup();
-  toast("Account created");
+function scrollToCars() {
+  document.getElementById("cars").scrollIntoView({ behavior: "smooth" });
 }
 
-function logout(){
-  user = null;
-  document.getElementById("authArea").classList.remove("hidden");
-  document.getElementById("userArea").classList.add("hidden");
-  toast("Logged out");
-}
-
-function showTab(tab){
-  rentalsTab.classList.add("hidden");
-  carsTab.classList.add("hidden");
-  document.getElementById(tab+"Tab").classList.remove("hidden");
-}
-
-function openLogin(){ loginModal.classList.remove("hidden"); }
-function closeLogin(){ loginModal.classList.add("hidden"); }
-function openSignup(){ signupModal.classList.remove("hidden"); }
-function closeSignup(){ signupModal.classList.add("hidden"); }
-
-function toast(msg){
-  const t = document.getElementById("toast");
-  t.innerText = msg;
-  t.classList.remove("hidden");
-  setTimeout(()=>t.classList.add("hidden"),3000);
-}
+renderCars();
