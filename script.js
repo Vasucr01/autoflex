@@ -13,6 +13,7 @@ const cars = [
   { id: 8, name: "Tata Nexon", price: 55, image: "images/tatanexon.webp" }
 ];
 
+/* ---------------- RENDER CARS ---------------- */
 function renderCars() {
   document.getElementById("car-grid").innerHTML = cars.map(car => `
     <div style="background:white;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
@@ -32,53 +33,83 @@ function renderCars() {
   `).join("");
 }
 
-function bookCar(id) {
-  if (!currentUser) {
-    openLogin();
-    return;
-  }
-  const car = cars.find(c => c.id === id);
-  rentals.push({
-    name: car.name,
-    price: car.price,
-    date: new Date().toLocaleDateString()
-  });
-  renderRentals();
-  alert("Car booked successfully (prototype)");
-}
-
-function renderRentals() {
-  document.getElementById("rentalsSection").innerHTML = rentals.length === 0
-    ? "<p>No rentals yet.</p>"
-    : rentals.map(r => `
-        <div style="background:white;padding:20px;border-radius:8px;margin-bottom:12px">
-          🚗 ${r.name} | ₹${r.price}/day | 📅 ${r.date}
-        </div>
-      `).join("");
-}
-
-function addCar() {
-  myCars.push("New Car Added");
-  document.getElementById("myCars").innerHTML = myCars.map(c =>
-    `<div style="background:white;padding:16px;border-radius:8px;margin-bottom:10px">${c}</div>`
-  ).join("");
-}
-
-function showTab(tab) {
-  document.getElementById("rentalsSection").style.display = tab === "rentals" ? "block" : "none";
-  document.getElementById("carsSection").style.display = tab === "cars" ? "block" : "none";
-}
-
+/* ---------------- LOGIN ---------------- */
 function openLogin() {
   document.getElementById("login-modal").style.display = "flex";
 }
 
 function login() {
-  currentUser = document.getElementById("email").value;
+  const email = document.getElementById("loginEmail").value.trim();
+
+  if (email === "") {
+    alert("Please enter email");
+    return;
+  }
+
+  currentUser = email;
+
   document.getElementById("login-modal").style.display = "none";
+  document.getElementById("loginBtn").innerText = "Logged In";
+
   alert("Login successful");
 }
 
+/* ---------------- BOOKING ---------------- */
+function bookCar(id) {
+  if (!currentUser) {
+    openLogin();
+    return;
+  }
+
+  const car = cars.find(c => c.id === id);
+
+  rentals.push({
+    name: car.name,
+    price: car.price,
+    date: new Date().toLocaleDateString()
+  });
+
+  renderRentals();
+  alert(`${car.name} booked successfully`);
+}
+
+/* ---------------- RENTALS ---------------- */
+function renderRentals() {
+  const box = document.getElementById("rentalsSection");
+
+  if (rentals.length === 0) {
+    box.innerHTML = "<p>No rentals yet.</p>";
+    return;
+  }
+
+  box.innerHTML = rentals.map(r => `
+    <div style="background:white;padding:20px;border-radius:8px;margin-bottom:12px">
+      🚗 <b>${r.name}</b><br>
+      📅 ${r.date} <br>
+      💰 ₹${r.price}/day
+    </div>
+  `).join("");
+}
+
+/* ---------------- ADD CAR (PROTOTYPE) ---------------- */
+function addCar() {
+  myCars.push("User Added Car");
+
+  document.getElementById("myCars").innerHTML = myCars.map(c =>
+    `<div style="background:white;padding:16px;border-radius:8px;margin-bottom:10px">${c}</div>`
+  ).join("");
+}
+
+/* ---------------- TABS ---------------- */
+function showTab(tab) {
+  document.getElementById("rentalsSection").style.display =
+    tab === "rentals" ? "block" : "none";
+
+  document.getElementById("carsSection").style.display =
+    tab === "cars" ? "block" : "none";
+}
+
+/* ---------------- SCROLL ---------------- */
 function scrollToCars() {
   document.getElementById("cars").scrollIntoView({ behavior: "smooth" });
 }
